@@ -11,15 +11,15 @@ import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat
 
 class EntitySoftReferenceConverterIntegrationTest {
 
     @ClassRule
-    public static DdcsefTestContainer cont = DdcsefTestContainer.Common.INSTANCE;
+    public static DdcsefTestContainer cont = DdcsefTestContainer.Common.INSTANCE
 
-    private Metadata metadata;
-    private Persistence persistence;
+    private Metadata metadata
+    private Persistence persistence
     private DataManager dataManager
     private EntitySoftReferenceConverter converter
 

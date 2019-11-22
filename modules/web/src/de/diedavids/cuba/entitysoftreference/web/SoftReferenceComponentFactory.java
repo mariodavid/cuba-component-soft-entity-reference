@@ -10,10 +10,7 @@ import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.factories.AbstractComponentGenerationStrategy;
-import com.haulmont.cuba.gui.xml.layout.ComponentsFactory;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
-
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
@@ -62,11 +59,5 @@ public class SoftReferenceComponentFactory extends AbstractComponentGenerationSt
         }
 
         return mpp;
-    }
-
-    protected void setDatasource(Field field, ComponentGenerationContext context) {
-        if (context.getDatasource() != null && StringUtils.isNotEmpty(context.getProperty())) {
-            field.setDatasource(context.getDatasource(), context.getProperty());
-        }
     }
 }

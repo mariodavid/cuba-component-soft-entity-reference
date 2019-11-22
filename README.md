@@ -17,7 +17,7 @@ Instead it is just a "weak" or "soft" reference to another entity.
 
 #### Example: Customer - Order
 
-Let's take the Customer <>--> Order example. A customer can have mutiple orders. We model that as an composition in CUBA.
+Let's take the Customer <>--> Order example. A customer can have multiple orders. We model that as an composition in CUBA.
 This means, that there will be a column "customer_id" in the Order table, which stores the primary key of the customer in
 the Order Table. For every Order, there is a Customer associated to it.
 
@@ -29,7 +29,7 @@ there will be no foreign key association on the database. Instead the following 
 ### Foreign keys are valuable, why would someone not want to have them?
 
 Correct. For pretty much every case, there is no need to use soft references. Since it misses all the cool features of
-referencial integrity, there are a lot of downsides. Why do we still need them? Here is an example:
+referential integrity, there are a lot of downsides. Why do we still need them? Here is an example:
 
 #### Example: Customer - Order - Comment
 

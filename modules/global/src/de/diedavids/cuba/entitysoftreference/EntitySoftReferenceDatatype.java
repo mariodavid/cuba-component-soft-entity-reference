@@ -43,8 +43,7 @@ public class EntitySoftReferenceDatatype implements Datatype<Entity> {
 
     @Nullable
     @Override
-    public Entity parse(@Nullable String value) throws ParseException {
-
+    public Entity parse(@Nullable String value) {
 
         if (Strings.isNullOrEmpty(value))
             return null;
@@ -77,7 +76,7 @@ public class EntitySoftReferenceDatatype implements Datatype<Entity> {
 
     @Nullable
     @Override
-    public Entity parse(@Nullable String value, Locale locale) throws ParseException {
+    public Entity parse(@Nullable String value, Locale locale) {
         return parse(value);
     }
 

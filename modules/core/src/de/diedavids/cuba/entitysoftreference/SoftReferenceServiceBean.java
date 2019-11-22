@@ -1,5 +1,6 @@
 package de.diedavids.cuba.entitysoftreference;
 
+import com.haulmont.chile.core.model.MetaClass;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Query;
@@ -54,13 +55,13 @@ public class SoftReferenceServiceBean implements SoftReferenceService {
 
     @Override
     public <T extends Entity> Collection<T> loadEntitiesForSoftReference(Class<T> polymorphicEntityClass,
-                                                                  Entity softReference,
-                                                                  String attribute,
-                                                                  String view) {
-        Transaction tx = persistence.createTransaction();
-        EntityManager em = persistence.getEntityManager();
-        Query query = createPolymorphicQuery(em, polymorphicEntityClass, attribute, softReference, view);
-        List result = query.getResultList();
+                                                                         Entity softReference,
+                                                                         String attribute,
+                                                                         String view) {
+        try (Transaction tx = persistence.createTransaction()) {
+            EntityManager em = persistence.getEntityManager();
+            Query query = createPolymorphicQuery(em, polymorphicEntityClass, attribute, softReference, view);
+            List result = query.getResultList();
 
         tx.commit();
 
@@ -68,6 +69,13 @@ public class SoftReferenceServiceBean implements SoftReferenceService {
     }
 
     private String getTableNameFromEntityClass(Class<? extends Entity> polymorphicEntityClass) {
-        return metadata.getClass(polymorphicEntityClass).getName();
+        if (polymorphicEntityClass == null) {
+            throw new IllegalArgumentException("Polymorphic entity class cannot be null.");
+        }
+        MetaClass entityClass = metadata.getClass(polymorphicEntityClass);
+        if (entityClass == null) {
+            throw new IllegalArgumentException("Unable to find metadata for class " + polymorphicEntityClass.getCanonicalName());
+        }
+        return entityClass.getName();
     }
 }

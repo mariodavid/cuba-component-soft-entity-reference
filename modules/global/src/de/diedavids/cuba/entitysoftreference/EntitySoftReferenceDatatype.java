@@ -8,7 +8,6 @@ import com.haulmont.cuba.core.global.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.text.ParseException;
 import java.util.Locale;
 
 public class EntitySoftReferenceDatatype implements Datatype<Entity> {
@@ -50,16 +49,16 @@ public class EntitySoftReferenceDatatype implements Datatype<Entity> {
         if (Strings.isNullOrEmpty(value))
             return null;
 
-
         EntityLoadInfoBuilder builder = getEntityLoadInfoBuilder();
         EntityLoadInfo entityLoadInfo = builder.parse(value);
-
-        Entity entity = loadEntity(entityLoadInfo);
-
-        return entity;
+        return loadEntity(entityLoadInfo);
     }
 
-    private Entity loadEntity(EntityLoadInfo entityLoadInfo) {
+    private Entity loadEntity(@Nullable EntityLoadInfo entityLoadInfo) {
+        if (entityLoadInfo == null){
+            return null;
+        }
+
         DataManager dataManager = getDataManager();
         return dataManager.load(getLoadContextForForEntityLoadInfo(entityLoadInfo.getMetaClass(), entityLoadInfo.getId()));
     }

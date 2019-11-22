@@ -73,9 +73,7 @@ public class SoftReferenceInstanceNameTableColumnGenerator implements Table.Colu
 
         linkButton.setCaption(metadataTools.getInstanceName(entitySoftReference));
 
-        linkButton.addClickListener(clickEvent -> {
-            softReferenceEditor(entitySoftReference).show();
-        });
+        linkButton.addClickListener(clickEvent -> softReferenceEditor(entitySoftReference).show());
         return linkButton;
     }
 

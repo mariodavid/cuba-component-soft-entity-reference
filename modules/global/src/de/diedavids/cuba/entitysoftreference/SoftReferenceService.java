@@ -1,6 +1,5 @@
 package de.diedavids.cuba.entitysoftreference;
 
-import com.haulmont.chile.core.model.MetaClass;
 import com.haulmont.cuba.core.entity.Entity;
 
 import java.util.Collection;

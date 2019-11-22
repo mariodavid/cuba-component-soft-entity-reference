@@ -60,10 +60,4 @@ public class SoftReferenceComponentFactory extends AbstractComponentGenerationSt
 
         return mpp;
     }
-
-    protected void setDatasource(Field field, ComponentGenerationContext context) {
-        if (context.getDatasource() != null && StringUtils.isNotEmpty(context.getProperty())) {
-            field.setDatasource(context.getDatasource(), context.getProperty());
-        }
-    }
 }

@@ -29,7 +29,7 @@ public class SoftReferenceServiceBean implements SoftReferenceService {
                                          String view) {
         String tableName = getTableNameFromEntityClass(polymorphicEntityClass);
         Query query = em.createQuery("select e from " + tableName + " e where e." + attribute + " = :softReference");
-        query.setParameter("softReference", softReference, false);
+        query.setParameter("softReference", softReference);
 
         if (view != null) {
             query.setView(polymorphicEntityClass, view);
@@ -63,9 +63,9 @@ public class SoftReferenceServiceBean implements SoftReferenceService {
             Query query = createPolymorphicQuery(em, polymorphicEntityClass, attribute, softReference, view);
             List result = query.getResultList();
 
-        tx.commit();
-
-        return result;
+            tx.commit();
+            return result;
+        }
     }
 
     private String getTableNameFromEntityClass(Class<? extends Entity> polymorphicEntityClass) {
